@@ -1,3 +1,7 @@
+/**
+ * Log utility class for Google Apps Script
+ * Provides logging functionality with different log levels and output methods
+ */
 class Log {
   // static log_level
   // UNKNOWN(6)
@@ -20,19 +24,19 @@ class Log {
 
   /**
    * Returns the log level for unknown messages.
-   * @returns {number} Log level for warnings.
+   * @returns {number} Log level for unknown messages.
    */
   static UNKNOWN() { return 6; }
 
   /**
    * Returns the log level for fault messages.
-   * @returns {number} Log level for warnings.
+   * @returns {number} Log level for fault messages.
    */
   static FAULT() { return 5; }
 
   /**
    * Returns the log level for error messages.
-   * @returns {number} Log level for warnings.
+   * @returns {number} Log level for error messages.
    */
   static ERROR() { return 4; }
 
@@ -55,8 +59,8 @@ class Log {
   static DEBUG() { return 1; }
 
   /**
-   * Sets the current log level.
-   * @param {number} level - The log level to set.
+   * Initializes the log level to DEBUG mode.
+   * This is a convenience method that sets the log level to the most verbose setting.
    */
   static initLogDebug() {
     Log.setLogLevel(Log.DEBUG())
@@ -103,9 +107,9 @@ class Log {
   }
 
   /**
-     * Logs a debug message if the log level is set to debug.
-     * @param {string} mes - The message to log.
-     */
+   * Logs a debug message if the log level is set to debug.
+   * @param {string} mes - The message to log.
+   */
   static debug(mes) {
     if (Log.getLogLevel() <= Log.DEBUG()) {
       console.error(mes);
@@ -458,14 +462,28 @@ class Log {
     console.log(value);
   }
 
+  /**
+   * Displays a message in the console log.
+   * @param {string} message - The message to display.
+   */
   static displayLog(message) {
     Log.display(message, 'CUI', true);
   }
 
+  /**
+   * Displays a message as an alert dialog.
+   * @param {string} message - The message to display.
+   */
   static displayAlert(message) {
     Log.display(message, 'GUI', true);
   }
 
+  /**
+   * Displays a message based on the specified kind and mode.
+   * @param {string} message - The message to display.
+   * @param {string} kind - The kind of display ('GUI' for alert, 'CUI' for console).
+   * @param {boolean} mode - Whether to display the message (true) or not (false).
+   */
   static display(message, kind, mode) {
     if (mode != true) {
       return;
@@ -477,6 +495,11 @@ class Log {
       console.log(message);
     }
   }
+
+  /**
+   * Tests the console output methods by logging different message types.
+   * This method is useful for debugging console functionality.
+   */
   static testConsole() {
     console.info('INFO')
     console.log('LOG')
